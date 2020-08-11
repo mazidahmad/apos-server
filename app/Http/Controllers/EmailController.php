@@ -13,7 +13,7 @@ class EmailController extends BaseController
         try {
             // Mail::to($user->email_user)->send(new RegisterValidationMail($user,$token));
             $email = new \SendGrid\Mail\Mail();
-            $email->setFrom("admin@apos.com", "APOS Admin");
+            $email->setFrom("mazid.ahmad.tif17@polban.ac.id", "Mazid Ahmad");
             $email->setSubject("APOS Registration Account");
             $email->addTo($user->email_user, $user->name_user);
             $email->addContent(

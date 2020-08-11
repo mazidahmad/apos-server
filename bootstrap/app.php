@@ -23,9 +23,9 @@ $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
 
-// $app->withFacades();
+$app->withFacades();
 
-// $app->withEloquent();
+$app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------
@@ -60,7 +60,6 @@ $app->singleton(
 */
 
 $app->configure('app');
-
 /*
 |--------------------------------------------------------------------------
 | Register Middleware
@@ -76,9 +75,10 @@ $app->configure('app');
 //     App\Http\Middleware\ExampleMiddleware::class
 // ]);
 
-// $app->routeMiddleware([
-//     'auth' => App\Http\Middleware\Authenticate::class,
-// ]);
+$app->routeMiddleware([
+    'auth' => App\Http\Middleware\Authenticate::class,
+    'role' => App\Http\Middleware\Role::class
+]);
 
 /*
 |--------------------------------------------------------------------------
@@ -91,10 +91,13 @@ $app->configure('app');
 |
 */
 
-// $app->register(App\Providers\AppServiceProvider::class);
+$app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
+$app->register(Illuminate\Mail\MailServiceProvider::class);
 
+// $app->configure('services');
+$app->configure('mail');
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes
@@ -111,5 +114,26 @@ $app->router->group([
 ], function ($router) {
     require __DIR__.'/../routes/web.php';
 });
+
+collect(scandir(__DIR__ . '/../config'))->each(function ($item) use ($app){
+    $app->configure(basename($item,'.php'));
+});
+
+$app->configure('mail');
+$app->alias('mailer', Illuminate\Mail\Mailer::class);
+$app->alias('mailer', Illuminate\Contracts\Mailer::class);
+$app->alias('mailer', Illuminate\Contracts\MailQueue::class);
+
+/*
+|--------------------------------------------------------------------------
+| Set Storage Path
+|--------------------------------------------------------------------------
+|
+| This script allows you to override the default storage location used by
+| the  application.  You may set the APP_STORAGE environment variable
+| in your .env file,  if not set the default location will be used
+|
+*/
+$app->useStoragePath(env('APP_STORAGE', base_path() . '/storage'));
 
 return $app;

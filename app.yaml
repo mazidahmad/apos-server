@@ -1,0 +1,31 @@
+runtime: php72
+
+runtime_config:
+  document_root: public
+
+env_variables:
+  # Put production environment variables here.
+  APP_KEY: mPlXuOS9PTKR6QIIUSVEvqErqCuAMOqB
+  APP_STORAGE: /tmp
+  APP_DEBUG : true 
+  VIEW_COMPILED_PATH: /tmp
+  CACHE_DRIVER: database
+  SESSION_DRIVER: database
+  ## Set these environment variables according to your CloudSQL configuration.
+  DB_DATABASE: apos-server
+  DB_USERNAME: apos-server
+  DB_PASSWORD: apos-server
+  DB_HOST: "/cloudsql/apos-server:asia-southeast1:apos-server"
+      
+  MAIL_DRIVER: smtp
+  MAIL_HOST: smtp.sendgrid.net
+  MAIL_PORT: 2525
+  MAIL_USERNAME: apikey
+  MAIL_PASSWORD: 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
+  MAIL_ENCRYPTION: tls
+  SENDGRID_API_KEY: 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
+
+beta_settings:
+    # for Cloud SQL, set this value to the Cloud SQL connection name,
+    # e.g. "project:region:cloudsql-instance"
+    cloud_sql_instances: "apos-server:asia-southeast1:apos-server"

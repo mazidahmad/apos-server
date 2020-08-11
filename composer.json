@@ -6,7 +6,19 @@
     "type": "project",
     "require": {
         "php": "^7.2.5",
-        "laravel/lumen-framework": "^7.0"
+        "doctrine/dbal": "^2.10",
+        "google/cloud-error-reporting": "^0.16.5",
+        "google/cloud-logging": "^1.20",
+        "google/cloud-storage": "^1.21",
+        "guzzlehttp/guzzle": "^6.5",
+        "illuminate/filesystem": "^7.20",
+        "illuminate/mail": "^7.12",
+        "illuminate/support": "^7.20",
+        "laravel/lumen-framework": "^7.0",
+        "league/flysystem": "^1.0",
+        "ramsey/uuid": "^4.0",
+        "s-ichikawa/laravel-sendgrid-driver": "^3.0",
+        "sendgrid/sendgrid": "~7"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.9.1",
